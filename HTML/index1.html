@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>순서목록(ordered List, List item)</title>
+        <style>
+            ol {
+                border: 1px solid #000;
+            }
+        </style>
     </head>
     <body>
-        <form action="#" method="get">
-            <div>메모장</div>
-            <label for="tit">제목:</label>
-            <input type="text" id="tit" name="title" /><br />
-            <label for="con">내용:</label>
-            <textarea id="con" name="content"></textarea><br />
-            <div>
-                <input type="submit" value="저장하기" />
-            </div>
-        </form>
+        <!-- h1{웹퍼블리싱 학습순서}+ol>li+li>ol>li{ex$}*3 -->
+        <h1>웹퍼블리싱 학습순서</h1>
+        <ol type="1" start="5">
+            <li>Html</li>
+            <li>
+                CSS
+                <ol type="1">
+                    <li>ex1</li>
+                    <li>ex2</li>
+                    <li>ex3</li>
+                </ol>
+            </li>
+            <li>Javascript</li>
+        </ol>
     </body>
 </html>
