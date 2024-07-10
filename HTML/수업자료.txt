@@ -1,0 +1,23 @@
+1. nodejs 설치 (LTS)
+2.버전 확인
+3.http로 서버구성 (v8엔진,  node 파일명. js)
+4.http 응용
+5.nodehs(http) + html => (웹서비스가능), 위치경로반환 __dirname
+----------------------------------------------
+6.express 설치(프레임워크)
+7.라우터생성( 호스트의 라우팅)
+8.로거설치(morgan)
+9.REST API - GET( 1.query string, 2.path ) , POST
+   1)http://localhost:3000/book?uname=....$bname=...&date=...
+   1)http://localhost:3000/book/김첨지/대박날/2024.07.09
+
+10.정적파일 제공서비스 : app.use('/', express.static(__dirname + 'HTML'));
+11.git, git init, git status, git add -A, git Commit -M "커밋내용" , git log
+커밋 : commit
+master -> main 변경 git config --global init.defaultBranch main
+
+
+(CRLF 에러 : git config --global core.autocrlf true)
+
+var => const, let
+,  :  ; (  {  [  &  |  /  \
