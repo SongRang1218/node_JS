@@ -8,6 +8,9 @@ const _path = path.join(__dirname, '/');
 app.use(logger('tiny'));
 app.use('/', express.static(_path));
 
+app.get('/', (req, res) => {
+    res.sendFile(_path + 'HTML/index.html');
+});
 app.get('/data', (req, res) => {
     const title = req.query.title;
     const content = req.query.content;

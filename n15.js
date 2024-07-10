@@ -11,11 +11,7 @@ app.get('/', (req, res) => {
     const name = 'save';
     const data = '파일내용이 작성 됨';
     res.send('파일이 저장되었습니다.');
-    fs.writeFile(_path + '.txt', data, (e) => {
-        if (e) console.log(e); //에러시  에러 내용 출력
-        console.log(__dirname + '/save.txt');
-        console.log('파일작성이 완료되었습니다.');
-    });
+    fs.writeFile(_path + '.txt', data, (e) => {});
 });
 
 app.listen(port, () => {
