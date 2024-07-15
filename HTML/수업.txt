@@ -1,0 +1,109 @@
+1. nodejs 설치 (LTS)
+2. 버전확인
+3. http 로 서버구성 (v8엔진 , node 파일명.js)
+4. http 응용
+5. nodejs(http) + html => (웹서비스가능) , 위치경로반환 __dirname
+----------------------------------------
+6. express 설치 (프레임워크)
+7. 라우터생성 (호스트의 라우팅)
+8. 로거설치(morgan)
+9. REST API - GET( 1.query string, 2.path ) , POST
+  1) http://localhost:3000/book?uname= ...&bname=....
+  2) http://localhost:3000/book/김첨지/대박날/2020.2.11
+
+10. 정적파일 제공서비스: app.use("/", express.static(__dirname + "/html"));
+-----------------------------------------
+11.git , git init, git status, git add -A, git commit -m "커밋내용", git log, git fetch ,  git pull 
+
+CRLF 에러 : git config --global core.autocrlf true
+커밋 : commit
+master -> main 변경 : git config --global init.defaultBranch main
+user.name 설정 : git config --global user.name "본인아이디"
+user.email 설정 : git config --global user.email "xxxx@gmail.com"
+
+12. fs.writeFile( '경로와 파일명', '내용', callback)
+
+----------------------------------------
+SQL
+ 1. DDL(데이터 정의어) : DDL(Data Definition Language)은 `데이터를 정의하는 언어'로서 BMS에서는 오브젝트라고 한다.
+	가) CREATE : 데이터베이스 오브젝트 생성
+	나) ALTER : 데이터베이스 오브젝트 변경
+	다) DROP : 데이터베이스 오브젝트 삭제
+
+2. DML (데이터 조작어) : 데이터를 조작하는 명령어를 DML(Data Manipulation Language)이라고 한다. 여기서 조작은 데이터 관점에서 생명 주기를 제어하는 것을 의미한다
+	가) INSERT : 테이블의 내용을 삽입
+	나) SELECT : 테이블의 내용을 조회
+	다) UPDATE : 테이블의 내용을 변경
+	라) DELETE : 테이블의 내용을 삭제
+
+3. DCL (데이터 제어어) : 데이터베이스에서 데이터 이외의 오브젝트에 대해 조작할 필요가 있다. 이때 사용하는 SQL 명령을 DCL(Data Control Language)이라고 한다.
+	가) GRANT : 사용자 권한 부여
+	나) REVOKE : 사용자 권한 회수
+	다) COMMIT : 트랜잭션 확정
+	라) ROLLBACK : 트랜잭션 취소
+
+------
+mySQL에서 키워드와 구문에서 대소문자 구분이 없음.
+테이블 명과 필드의 이름은 대소문자를 구분함.
+------
+외부sql 파일 임포트:
+root 권한으로 로그인 하여
+source 'SQL 파일의 경로'
+
+===========================================
+1) CountryCode = 'USA' 중 인구기준으로 오름차순으로 변경하라.
+   힌트: ORDER BY ......  ASC 
+
+SELECT *
+FROM City WHERE CountryCode = 'USA'
+ORDER BY Population ASC;
+
+2) CountryCode = 'KOR' 의 갯수를 카운팅하라.
+   힌트: count(*)
+
+3) 한국 인구의 최솟값, 최댓값, 총합, 평균을 출력하라.
+   힌트: min(?) , max(?), sum(?), avg(?)
+
+4) 한국의 지역이 경상남도인 경우만 도시이름을 한줄로 출력하라.
+  힌트: SELECT group_concat(Name) FROM .......
+
+5) 한국의 지역을 기준으로 그룹화하여 갯수를 출력하라.
+   => SELECT district , count(*) FROM city WHERE CountryCode ='KOR' GROUP BY District;
+
+6) 한국 내에서 도시인구의 평균 보다 작은 도시만을 출력하라.
+
+7) 전세계에서 도시규모가 오백만보다 많으면 '오~백만이 넘음',  백만보다 많으면 '백만이 넘음' 10만이 넘으면 '작은도시' 그도 아니면 '너무작음' 아라는 표현을 도시규모라는 칼럼을 하나 더 만들어서 나타내어라.
+힌트:   CASE  WHEN Population > 5000000 THEN '오~백만이 넘음' .....  
+         ....
+         END As '도시규모'
+         FROM city 
+
+8) 전세계에서 50만명이 안되는 나라중에 s가 두번이상 들어가거나 마지막에 k로 끝나는 모든 나라를 출력하시오.
+   => SELECT * FROM city WHERE name REGEXP 's{2}|k$' AND population < 500000;
+
+
+
+
+
+
+
+
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'swm',
+    port: 3306,
+    password: '1234',
+    database: 'test_db',
+});
+
+
+
+그외:
+var => const , let
+,   :   ;   (   {   [   &  |  / \ `
+
+
+
+
+
+

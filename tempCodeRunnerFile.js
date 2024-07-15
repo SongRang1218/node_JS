@@ -1,2 +1,2 @@
-
-    list += `                <li><a href="/story?id=1">Egg</a></li>`;
+app.use(logger('tiny'));
+app.use('/', express.static(_path));
