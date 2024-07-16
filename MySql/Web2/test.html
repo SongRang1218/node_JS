@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <style>
+            h1 {
+                text-align: center;
+            }
+            table {
+                border-collapse: collapse;
+                text-align: center;
+                width: 60%;
+                margin: auto;
+                border: 1px solid #000;
+            }
+
+            tr,
+            td,
+            th {
+                border: 1px solid #000;
+            }
+
+            th {
+                background-color: lightblue;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <h1>구구단</h1>
+            <select name="gugu" id="">
+                <option value="2">2단</option>
+                <option value="3">3단</option>
+                <option value="4">4단</option>
+                <option value="5">5단</option>
+            </select>
+            <tr>
+                <th>공백</th>
+                <th>2단</th>
+                <th>3단</th>
+                <th>4단</th>
+                <th>5단</th>
+                <th>6단</th>
+                <th>7단</th>
+                <th>8단</th>
+                <th>9단</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>${i}X1=${j}</td>
+                <td>${i}X1=${j}</td>
+                <td>${i}X1=${j}</td>
+                <td>${i}X1=${j}</td>
+                <td>${i}X1=${j}</td>
+                <td>${i}X1=${j}</td>
+                <td>${i}X1=${j}</td>
+                <td>${i}X1=${j}</td>
+            </tr>
+        </table>
+    </body>
+</html>
+<!-- +--------+-------+------+-----------+------------------+
+| NumBer | ID    | PW   | Name      | Email            |
++--------+-------+------+-----------+------------------+
+|      1 | NULL  | NULL | NULL      | NULL             |
+|      2 | NULL  | NULL | NULL      | NULL             |
+|      3 | NULL  | NULL | NULL      | NULL             |
+|      4 | NULL  | NULL | NULL      | NULL             |
+|      5 | 11234 | 1234 | 1234      | 1234             |
+|      6 | ahn   | 1234 | 안중근    | ahn@tes.com      |
+|      7 | swdd  | 1234 | 랑        | fdfsa@nfadfg.com |
+|      8 | aaa   | bbb  | ccc       | ddd              |
++--------+-------+------+-----------+------------------+ -->

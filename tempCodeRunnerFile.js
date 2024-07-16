@@ -1,2 +1,5 @@
-app.use(logger('tiny'));
-app.use('/', express.static(_path));
+
+    if('/dan'=`${i}단`){
+    }
+    const gugu = req.query.gugu;
+    console.log('gugu');
