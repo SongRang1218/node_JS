@@ -1,0 +1,291 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+새로운 기능 및 개선 사항에 대 한 최신 PowerShell을 설치 하세요! https://aka.ms/PSWindows
+
+PS C:\Users\plcto> mysql -uroot -p
+Enter password: ******
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 4
+Server version: 11.4.2-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.015 sec)
+
+MariaDB [(none)]> use mysql;use
+Database changed
+MariaDB [mysql]> SELECT host, user, password FROM user;
++-----------+-------------+-------------------------------------------+
+| Host      | User        | Password                                  |
++-----------+-------------+-------------------------------------------+
+| localhost | mariadb.sys |                                           |
+| localhost | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| n100s1    | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| 127.0.0.1 | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| ::1       | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
++-----------+-------------+-------------------------------------------+
+5 rows in set (0.010 sec)
+
+MariaDB [mysql]> CREATE user kys@localhost IDENTIFIED BY '1234';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [mysql]> SELECT host, user, password FROM user;
++-----------+-------------+-------------------------------------------+
+| Host      | User        | Password                                  |
++-----------+-------------+-------------------------------------------+
+| localhost | mariadb.sys |                                           |
+| localhost | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| n100s1    | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| 127.0.0.1 | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| ::1       | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| localhost | kys         | *A4B6157319038724E3560894F7F932C8886EBFCF |
++-----------+-------------+-------------------------------------------+
+6 rows in set (0.004 sec)
+
+MariaDB [mysql]> CREATE user 'kys'@'%' IDENTIFIED BY '1234';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [mysql]> SELECT host, user, password FROM user;
++-----------+-------------+-------------------------------------------+
+| Host      | User        | Password                                  |
++-----------+-------------+-------------------------------------------+
+| localhost | mariadb.sys |                                           |
+| localhost | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| n100s1    | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| 127.0.0.1 | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| ::1       | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| localhost | kys         | *A4B6157319038724E3560894F7F932C8886EBFCF |
+| %         | kys         | *A4B6157319038724E3560894F7F932C8886EBFCF |
++-----------+-------------+-------------------------------------------+
+7 rows in set (0.002 sec)
+
+MariaDB [mysql]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [mysql]> CREATE user 'kkk'@'%' IDENTIFIED BY '1234';
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [mysql]> SELECT host, user, password FROM user;
++-----------+-------------+-------------------------------------------+
+| Host      | User        | Password                                  |
++-----------+-------------+-------------------------------------------+
+| localhost | mariadb.sys |                                           |
+| localhost | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| n100s1    | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| 127.0.0.1 | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| ::1       | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| localhost | kys         | *A4B6157319038724E3560894F7F932C8886EBFCF |
+| %         | kys         | *A4B6157319038724E3560894F7F932C8886EBFCF |
+| %         | kkk         | *A4B6157319038724E3560894F7F932C8886EBFCF |
++-----------+-------------+-------------------------------------------+
+8 rows in set (0.002 sec)
+
+MariaDB [mysql]> DROP USER kkk@'%';
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [mysql]> SELECT host, user, password FROM user;
++-----------+-------------+-------------------------------------------+
+| Host      | User        | Password                                  |
++-----------+-------------+-------------------------------------------+
+| localhost | mariadb.sys |                                           |
+| localhost | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| n100s1    | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| 127.0.0.1 | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| ::1       | root        | *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |
+| localhost | kys         | *A4B6157319038724E3560894F7F932C8886EBFCF |
+| %         | kys         | *A4B6157319038724E3560894F7F932C8886EBFCF |
++-----------+-------------+-------------------------------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [mysql]> SHOW GRANTS FOR kys@localhost;
++------------------------------------------------------------------------------------------------------------+
+| Grants for kys@localhost
+             |
++------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `kys`@`localhost` IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF' |
++------------------------------------------------------------------------------------------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [mysql]> GRANT SELECT, INSERT ON test_db.* TO kys@localhost;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [mysql]> SHOW GRANTS FOR kys@localhost;
++------------------------------------------------------------------------------------------------------------+
+| Grants for kys@localhost
+             |
++------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `kys`@`localhost` IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF' |
+| GRANT SELECT, INSERT ON `test_db`.* TO `kys`@`localhost`
+             |
++------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [mysql]> GRANT ALL PRIVILEGES ON test_db.* TO kys@localhost;
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [mysql]> SHOW GRANTS FOR kys@localhost;
++------------------------------------------------------------------------------------------------------------+
+| Grants for kys@localhost
+             |
++------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `kys`@`localhost` IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF' |
+| GRANT ALL PRIVILEGES ON `test_db`.* TO `kys`@`localhost`
+             |
++------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [mysql]> GRANT ALL PRIVILEGES ON *.* TO kys@localhost;
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [mysql]> SHOW GRANTS FOR kys@localhost;
++---------------------------------------------------------------------------------------------------------------------+
+| Grants for kys@localhost
+                      |
++---------------------------------------------------------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO `kys`@`localhost` IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF' |
+| GRANT ALL PRIVILEGES ON `test_db`.* TO `kys`@`localhost`
+                      |
++---------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [mysql]> REVOKE ALL ON *.* FROM `kys`@`localhost`;
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [mysql]> SHOW GRANTS FOR kys@localhost;
++------------------------------------------------------------------------------------------------------------+
+| Grants for kys@localhost
+             |
++------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `kys`@`localhost` IDENTIFIED BY PASSWORD '*A4B6157319038724E3560894F7F932C8886EBFCF' |
+| GRANT ALL PRIVILEGES ON `test_db`.* TO `kys`@`localhost`
+             |
++------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [mysql]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.002 sec)
+
+MariaDB [mysql]> CREATE test_db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'test_db' at line 1
+MariaDB [mysql]> CREATE DATABASE test_db;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [mysql]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test_db            |
++--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [mysql]> use test_db
+Database changed
+MariaDB [test_db]> CREATE TABLE tb1;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [test_db]> CREATE TABLE tb1 (idx int, name varchar(100), age int);
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [test_db]> SHOW TABLES;
++-------------------+
+| Tables_in_test_db |
++-------------------+
+| tb1               |
++-------------------+
+1 row in set (0.002 sec)
+
+MariaDB [test_db]> INSERT INTO tb1 values(1,'홍길동',22);
+ERROR 1366 (22007): Incorrect string value: '\xED\x99\x8D\xEA\xB8\xB8...' for column `test_db`.`tb1`.`name` at row 1
+MariaDB [test_db]> INSERT INTO tb1 values(1,'Harry',22);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [test_db]> SELECT * from tb1;
++------+-------+------+
+| idx  | name  | age  |
++------+-------+------+
+|    1 | Harry |   22 |
++------+-------+------+
+1 row in set (0.001 sec)
+
+MariaDB [test_db]> ALTER DATABASE test_db CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci;
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [test_db]> INSERT INTO tb1 values(1,'홍길동',22);
+ERROR 1366 (22007): Incorrect string value: '\xED\x99\x8D\xEA\xB8\xB8...' for column `test_db`.`tb1`.`name` at row 1
+MariaDB [test_db]> ALTER TABLE tb1 CONVERT CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci' at line 1
+MariaDB [test_db]> ALTER TABLE tb1 CONVERT TO CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci;
+Query OK, 1 row affected (0.032 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+MariaDB [test_db]> INSERT INTO tb1 values(1,'홍길동',22);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [test_db]> SHOW TABLES;
++-------------------+
+| Tables_in_test_db |
++-------------------+
+| tb1               |
++-------------------+
+1 row in set (0.002 sec)
+
+MariaDB [test_db]> SELECT * from tb1;
++------+-----------+------+
+| idx  | name      | age  |
++------+-----------+------+
+|    1 | Harry     |   22 |
+|    1 | 홍길동    |   22 |
++------+-----------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [test_db]> UPDATE tb1
+    -> SET age='23'
+    -> WHERE name='홍길동';
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [test_db]> SELECT * from tb1;
++------+-----------+------+
+| idx  | name      | age  |
++------+-----------+------+
+|    1 | Harry     |   22 |
+|    1 | 홍길동    |   23 |
++------+-----------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [test_db]> DELETE FROM tb1
+    -> WHERE age<23;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [test_db]> SELECT * from tb1;
++------+-----------+------+
+| idx  | name      | age  |
++------+-----------+------+
+|    1 | 홍길동    |   23 |
++------+-----------+------+
+1 row in set (0.001 sec)
+
+MariaDB [test_db]>

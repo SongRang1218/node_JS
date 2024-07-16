@@ -32,6 +32,7 @@ app.get('/data', (req, res) => {
             console.log(err);
             return;
         }
+        res.redirect('/');
         console.log(`name : ${name}, dob : ${dob}`);
         console.log('Data inserted successfully');
     }); //MySQL query here
