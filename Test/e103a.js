@@ -3,13 +3,17 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/e103.html');
+});
+
+app.get('/gugu', (req, res) => {
     const gugu = req.query.gugu ? parseInt(req.query.gugu) : null;
     let list = `<!DOCTYPE html>`;
     list += `<html lang="ko">`;
     list += `    <head>`;
     list += `        <meta charset="UTF-8" />`;
     list += `        <meta name="viewport" content="width=device-width, initial-scale=1.0" />`;
-    list += `        <title>Document</title>`;
+    list += `        <title>구구단</title>`;
     list += `        <style>`;
     list += `            h1{ text-align: center;}`;
     list += `            table {`;
@@ -39,7 +43,7 @@ app.get('/', (req, res) => {
     list += `    <body>`;
     list += `        <table>`;
     list += `            <h1>구구단</h1>`;
-    list += `            <form action="/">`;
+    list += `            <form action="/gugu">`;
     list += `                <select name="gugu">`;
     for (let k = 2; k <= 9; k++) {
         list += `                    <option value="${k}" ${gugu === k ? 'selected' : ''}>${k}단</option>`;

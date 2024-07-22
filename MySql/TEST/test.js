@@ -44,14 +44,6 @@ app.get('/login', (req, res) => {
     const { ID, PW } = req.body;
     db.query(`SELECT count(*) FROM test WHERE ID=${ID} AND PW=${PW} `, (err, results) => {
         console.log('results');
-        if (ID === 'test' && PW == '1234') {
-            req.session.loggedIn = true;
-            req.session.username = username;
-            res.redirect('/');
-        } else {
-            res.send(`<h3>흥 어림없는소리</h3>
-            <button onclick="location.href='/'">빠꾸</button>`);
-        }
     });
 });
 
