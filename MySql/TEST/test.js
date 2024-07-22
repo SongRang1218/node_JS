@@ -28,7 +28,7 @@ db.connect((error) => {
         console.log('접속실패~~~~');
         return;
     }
-    console.log('MySQL Connected!');
+    console.log('접속에 실패하셨습니다');
 });
 
 app.get('/', (req, res) => {
