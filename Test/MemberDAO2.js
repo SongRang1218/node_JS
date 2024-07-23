@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
                 </body>
             </html>`);
     } else {
-        res.sendFile(__dirname + '/index.html');
+        res.sendFile(__dirname + '/login2.html');
     }
 });
 
@@ -85,7 +85,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.get('/login', (req, res) => {
+app.get('/e105a', (req, res) => {
     res.send(`
         <!DOCTYPE html>
 <html lang="ko">
@@ -160,7 +160,7 @@ app.get('/login', (req, res) => {
                      />
             <label for="pw">비밀번호 : </label>
             <input type="password" id="pw" name="password" placeholder="비밀번호" />
-            <button type="submit">Login</button>
+            <button type="submit">로그인</button>
             <button type="reset" class="reset-btn">다시 입력</button>
         </form>
     </div>
@@ -171,21 +171,16 @@ app.get('/login', (req, res) => {
 
 app.post('/', (req, res) => {
     const { username, password } = req.body; // query 는 get 방식
-    const idOK = /^[A-Za-z0-9]{1,8}$/g.test(username); //방법 1. true or false 변환
-    const pwOK = password.match(/^[A-Za-z0-9!@#$%&*+-]{1,10}$/g); //방법 2. 정규표현식에 일치한 값
-    console.log(idOK, pwOK, !!pwOK);
-    if (idOK && !!pwOK) {
+
+    if (username && password) {
         if (username != null && password != 0) {
             req.session.loggedIn = true;
             req.session.username = username;
             res.redirect('/');
-        } else {
-            res.send(`<h3>흥 어림없는소리</h3>
-            <button onclick="location.href='/'">빠꾸</button>`);
         }
     } else {
-        res.send(`<script>alert('입력조건이 맞지 않습니다. 다시 확인해주세요.'); 
-            window.location.href='/login';</script>
+        res.send(`<script>alert('정보가 입력되지 않았습니다. 다시 확인후 입력해주세요.'); 
+            window.location.href='/';</script>
             `);
     }
 });

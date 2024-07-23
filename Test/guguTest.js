@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/e103.html');
+    res.sendFile(__dirname + '/gugu.html');
 });
 
 app.get('/gugu', (req, res) => {
@@ -49,7 +49,7 @@ app.get('/gugu', (req, res) => {
         list += `                    <option value="${k}" ${gugu === k ? 'selected' : ''}>${k}단</option>`;
     }
     list += `                </select>`;
-    list += `                <input type="submit" value="화긴">`;
+    list += `                <input type="submit" value="화긴" name="Name">`;
     list += `            </form>`;
     list += `            <tr><th>수＼단</th>`;
     for (let i = 2; i <= 9; i++) {

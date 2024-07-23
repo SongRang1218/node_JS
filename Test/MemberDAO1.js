@@ -20,7 +20,7 @@ db.connect((error) => {
     console.log('연동완료');
 });
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/e104.html');
+    res.sendFile(__dirname + '/memberForm.html');
     console.log('웹에 정상 접속 하였습니다.');
 });
 
