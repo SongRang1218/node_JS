@@ -1,124 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous" />
-  </head>
-  <body>
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseOne"
-            aria-expanded="false"
-            aria-controls="flush-collapseOne">
-            Java
-          </button>
-        </h2>
-        <div
-          id="flush-collapseOne"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
-            provident sequi, officia illum itaque adipisci hic iste veniam
-            doloribus praesentium eligendi modi? Aliquam reprehenderit excepturi
-            vel odit ipsam ex, nisi sint veniam voluptas exercitationem quasi
-            culpa non, magni amet delectus ea commodi error ad architecto fugiat
-            deserunt similique vitae minima!
-          </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">파일전송완료</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    파일이 정상적으로 전송되었습니다!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="window.location.href='/'">Close</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseTwo"
-            aria-expanded="false"
-            aria-controls="flush-collapseTwo">
-            Python <span class="badge text-bg-warning">New</span></h6>
-          </button>
-        </h2>
-        <div
-          id="flush-collapseTwo"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-            accusantium perspiciatis dolor, harum molestias at repellat
-            distinctio provident, reiciendis animi magni. Delectus, veritatis.
-            Officiis aspernatur beatae, sequi aperiam ullam, sit quis a
-            doloribus voluptatum cupiditate numquam sed eum necessitatibus
-            exercitationem quod. Eaque veritatis sint voluptatibus labore. Id,
-            minus deserunt! Quaerat.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseThree"
-            aria-expanded="false"
-            aria-controls="flush-collapseThree">
-            Javascript
-          </button>
-        </h2>
-        <div
-          id="flush-collapseThree"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat
-            asperiores delectus omnis quis sunt sed maxime, quo dolorum animi
-            similique enim, laudantium facere quas quisquam excepturi aliquam
-            officiis distinctio quod placeat. Fugit aut at consequatur laborum
-            recusandae mollitia sequi iure nobis, libero nulla magni. Officia
-            architecto atque quae voluptates distinctio.
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseFour"
-            aria-expanded="false"
-            aria-controls="flush-collapseFour">
-            Javascrip
-          </button>
-        </h2>
-        <div
-          id="flush-collapseFour"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            <form action="/up" method="POST" enctype="multipart/form-data" class="input-group mb-3 ">
-              <input type="file" class="form-control" id="inputGroupFile02">
-              <button type="submit" class="btn btn-primary">파일올리기</button>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"></script>
-  </body>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    JAVA
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, labore
+                    tempora provident atque explicabo vero, officia tempore perspiciatis veritatis, ab nobis dolorem
+                    sapiente. Nisi blanditiis distinctio, eum reprehenderit tenetur, deserunt maxime corporis illo
+                    nesciunt doloremque iure aspernatur ex nulla, earum reiciendis! Consectetur id quia eaque unde
+                    minima, ipsa corporis optio.</code> class. This is the first item's accordion body.</div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    Python<span class="badge text-bg-info">3</span>
+                </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. In sit quo, alias
+                    officia culpa excepturi explicabo possimus impedit iure a, adipisci est incidunt tempora dignissimos
+                    laborum quidem quos quas, sed suscipit unde fuga. Distinctio, possimus nemo. Aperiam, consequatur?
+                    Ipsa rem laborum incidunt ducimus consequuntur maiores cum ea, illum repellendus architecto?</code>
+                    class. This is the second item's accordion body. Let's imagine this
+                    being filled with some actual content.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    Javascript
+                </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum fugit quae
+                    quasi? Hic non, corrupti ex natus, neque repellat esse laudantium exercitationem laborum consequatur
+                    perferendis pariatur? Nemo, dignissimos suscipit voluptatem recusandae consequatur molestiae
+                    accusamus in rerum magni dolores architecto exercitationem reprehenderit autem quas dicta distinctio
+                    sed. Distinctio obcaecati perferendis velit!
+                    <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting
+                    happening here in terms of content, but just filling up the space to make it look, at least at first
+                    glance, a bit more representative of how this would look in a real-world application.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    File UpLoad
+                </button>
+            </h2>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <form action="/up" method="POST" enctype="multipart/form-data" class="input-group mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="ufile">
+                        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            type="submit" id="inputGroupFileAddon04">Button</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
 </html>
