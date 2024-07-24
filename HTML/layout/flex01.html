@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Float</title>
+        <style>
+            .ex-layout {
+                height: 310px;
+                flex-wrap: nowrap;
+            }
+            .menu {
+                width: 300px;
+                height: 40px;
+                border: 2px solid #09c;
+                background-color: beige;
+            }
+            .left-menu {
+                width: 50px;
+                height: 254px;
+                border: 2px solid red;
+                background-color: rgb(218, 218, 104);
+            }
+            .content {
+                margin-left: 54px;
+                width: 250px;
+                border: 2px solid blue;
+                background-color: antiquewhite;
+            }
+
+            .article {
+                height: 200px;
+                border: 2px solid blue;
+                background-color: gainsboro;
+            }
+
+            .comment {
+                height: 50px;
+                border: 2px solid purple;
+                background-color: lightcyan;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- div.ex-layout>.div.menu{global menu}+div.main>div.left-menu{left menu}+div.content>div.article{article}+div.comment{comment} -->
+        <div class="ex-layout">
+            <div class="div menu">global menu</div>
+            <div class="main">
+                <div class="left-menu">left menu</div>
+                <div class="content">
+                    <div class="article">article</div>
+                    <div class="comment">comment</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

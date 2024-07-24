@@ -2,12 +2,15 @@ const express = require('express');
 const logger = require('morgan');
 const fs = require('fs');
 const path = require('path');
-const multer = require('multer'); // 파일업로드 처리하는 미들웨어
+const multer = require('multer');
 const { Script } = require('vm');
+const zip = require('express-zip');
 
 const app = express();
 const port = 3000;
 const _path = path.join(__dirname, '/');
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
     res.send(`<a href="/list">다운로드 페이지 바로가기</a>`);
 });
@@ -73,39 +76,50 @@ app.get('/list', (req, res) => {
         .btn-close {
             filter: invert(1);
         }
-    </style>
-
-    <script> var MAX_FILE_SIZE = 10 * 1024 * 1024; </script>
-    <script>
-    function file_onchange(f) {
-        if ( f.files[0] != null ) {
-            var fileSize = f.files[0].size;
-            if (fileSize > MAX_FILE_SIZE ) {
-                alert("파일용량은 10MB 이하만 가능합니다.");
-                $(f).val('');
-    }
+        .selected {
+            background-color: white !important;
+            color: black !important;
         }
-    }
-</script>
+    </style>
+    <script>
+        function toggleSelection(checkbox, fileName) {
+            const listItem = checkbox.closest('.list-group-item');
+            if (checkbox.checked) {
+                listItem.classList.add('selected');
+            } else {
+                listItem.classList.remove('selected');
+            }
+        }
+
+        function downloadSelectedFiles() {
+            const checkboxes = document.querySelectorAll('.file-checkbox:checked');
+            const selectedFiles = [];
+            checkboxes.forEach((checkbox) => {
+                selectedFiles.push(checkbox.value);
+            });
+
+            if (selectedFiles.length > 0) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/download';
+
+                selectedFiles.forEach((file) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'files';
+                    input.value = file;
+                    form.appendChild(input);
+                });
+
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                alert('No files selected for download.');
+            }
+        }
+    </script>
 </head>
 <body>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">파일전송완료</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    파일이 정상적으로 전송되었습니다!
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        onclick="window.location.href='/'">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -118,31 +132,33 @@ app.get('/list', (req, res) => {
                     <div class="list-group">`;
 
         files.forEach((file) => {
-            list += `<li class="list-group-item"><a href='/list/${file}' onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;" class="file-link">${file}</a><a href='/list/${file}' class="file-link" download> - [Download]</a></li>`;
+            list += `<li class="list-group-item">
+                        <input type="checkbox" class="file-checkbox" value="${file}" onclick="toggleSelection(this, '${file}')">
+                        <a href='/list/${file}' onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;" class="file-link">&emsp;${file}</a>
+                        <a href='/list/${file}' class="file-link" download> - [Download]</a>
+                    </li>`;
         });
 
         list += `
-                   </div>
+                    </div>
+                    <button class="btn btn-outline-primary mt-3" onclick="downloadSelectedFiles()">모두 다운로드</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="input-group">
         <form action="/up" method="POST" enctype="multipart/form-data" class="input-group mb-3">
-            <!-- 업로드 파일 용량체크 -->
             <input type="file" class="form-control" id="inputGroupFile02" name="ufile" onchange="checkSize(this)">
-            <!-- 모달창 열기, submit하기 -->
-            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                type="submit" id="inputGroupFileAddon04" disabled>파일업로드</button>
+            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" id="inputGroupFileAddon04" disabled>파일업로드</button>
         </form>
     </div>
-<script>
+    <script>
         const btnActive = () => document.getElementById('inputGroupFileAddon04').disabled = false
         const btnDisable = () => document.getElementById('inputGroupFileAddon04').disabled = true
         function checkSize(input) {
             console.log(input.files[0].name, input.files[0].size)
             if (!!input.files && (input.files[0].size > 10 * 1024 * 1024)) {
-                alert('파일 사이즈가 10MB를 넘슴니다.')
+                alert('파일 사이즈가 10MB를 넘습니다.')
                 btnDisable()
             } else {
                 console.log('파일 사이즈가 적당합니다.')
@@ -150,11 +166,7 @@ app.get('/list', (req, res) => {
             }
         }
     </script>
-
-</script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>`;
         res.send(list);
@@ -163,17 +175,29 @@ app.get('/list', (req, res) => {
 
 const storage = multer.diskStorage({
     destination: (req, res, cb) => {
-        cb(null, path.join('./Note')); // 경로를 같은 폴더에 설정
+        cb(null, path.join('./Note'));
     },
     filename: (req, res, cb) => {
-        let fix = Buffer.from(res.originalname, 'latin1').toString('utf8'); // 파일명, 한글 깨짐 방지
-        cb(null, fix); // 오리지널 네임
+        let fix = Buffer.from(res.originalname, 'latin1').toString('utf8');
+        cb(null, fix);
     },
 });
-let upload = multer({ storage }); // multer의 옵션을 오브젝트로 설정
+let upload = multer({ storage });
 
 app.post('/up', upload.single('ufile'), (req, res) => {
     console.log(req.file);
+    res.redirect('/list');
+});
+
+app.post('/download', (req, res) => {
+    const files = req.body.files;
+    if (Array.isArray(files) && files.length > 0) {
+        const zip = require('express-zip');
+        const filePaths = files.map((file) => ({ path: path.join('./Note', file), name: file }));
+        res.zip(filePaths, 'selected_files.zip');
+    } else {
+        res.status(400).send('No files selected for download.');
+    }
 });
 
 app.listen(port, () => {
