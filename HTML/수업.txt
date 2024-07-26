@@ -81,20 +81,18 @@ ORDER BY Population ASC;
 8) 전세계에서 50만명이 안되는 나라중에 s가 두번이상 들어가거나 마지막에 k로 끝나는 모든 나라를 출력하시오.
    => SELECT * FROM city WHERE name REGEXP 's{2}|k$' AND population < 500000;
 
+=====================================================
+컬럼추가 및 자동증가
+ALTER TABLE web ADD COLUMN id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+컬럼순서 변경
+ALTER TABLE web MODIFY COLUMN id INT FIRST;
 
+컬럼 자동번호 재수정(간혹 기존데이터와 추가되는 데이터가 충돌될 때 함더 적용, PRIMARY KEY제외)
+ALTER TABLE web MODIFY id INT NOT NULL AUTO_INCREMENT FIRST;
 
+web2 예제 생성:
+CREATE TABLE Home(Num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,Title varchar(500),name varchar(50),Today DATE, Con COUNT(INT) );
 
-
-
-
-
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'swm',
-    port: 3306,
-    password: '1234',
-    database: 'test_db',
-});
 
 
 

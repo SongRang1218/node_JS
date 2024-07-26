@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const bt = document.getElementById('ok');
+                const bts = document.getElementById('end');
+                const modal = document.querySelector('.modal');
+                const modalbody = document.querySelector('.modal-body');
+                const modalinput = document.querySelector('.text');
+                const modalarea = document.querySelector('.textarea');
+                bt.addEventListener('click', () => modal.classList.add('show'));
+                bts.addEventListener('click', () => modal.classList.remove('show'));
+                modal.addEventListener('click', (e) => {
+                    modal.classList.remove('show');
+                    // modalbody.addEventListener('click', (event) => event.stopPropagation());
+                    modalinput.addEventListener('click', (event) => event.stopPropagation());
+                    modalarea.addEventListener('click', (event) => event.stopPropagation());
+                });
+            });
+        </script>
+        <style>
+            body {
+                margin: 0;
+                padding: 30px;
+            }
+            .modal {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: none;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            .modal.show {
+                display: block;
+            }
+            .modal-body {
+                position: absolute;
+                top: 20%;
+                left: 35%;
+                min-width: 250px;
+                height: 400px;
+                padding: 20px;
+                text-align: start;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 3px 0 #000;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="modal">
+            <div class="modal-body">
+                <span>게시글작성</span>
+                <hr />
+                <div class="modal-title">
+                    <span> 작성자</span>
+                </div>
+                <span>제목 : </span>
+                <input class="text" type="text" /><br />
+                <span>내용 : </span><br />
+                <textarea class="textarea" id="textarea" cols="30" row="10"></textarea>
+                <div><button id="end">종료</button></div>
+            </div>
+        </div>
+        <h2>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint, ex cum pariatur velit eveniet facilis.
+            Accusantium ipsam enim odit beatae eum in consectetur, rem sed necessitatibus pariatur similique, vero qui!
+        </h2>
+        <button id="ok">확인</button>
+    </body>
+</html>

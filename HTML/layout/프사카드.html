@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            body {
+                padding-top: 8rem;
+                display: flex;
+                justify-content: center;
+            }
+            .card {
+                max-width: 360px;
+                height: 400px;
+                width: 250px;
+                /* background-color: #3354f1; */
+                border-radius: 2rem;
+                overflow: hidden;
+                box-shadow: 10px 10px 30px #000;
+                display: flex;
+                flex-direction: column;
+                font: 1.5rem #000;
+            }
+            .banner {
+                background-image: url(./호냥이.png);
+                background-size: 250px;
+                display: flex;
+                justify-content: center;
+            }
+            .profile {
+                width: 8rem;
+                height: 8rem;
+                background-image: url('https://item.kakaocdn.net/do/ac144a7a26e9355e505aa237ea189cd6f43ad912ad8dd55b04db6a64cddaf76d');
+                background-size: 120px;
+                border-radius: 50%;
+                box-shadow: 10px 10px 30px #000;
+                transform: translateY(100%);
+                transition: transform 250ms ease;
+            }
+            .profile:hover {
+                transform: translateY(100%) scale(3);
+            }
+            .name {
+                text-align: center;
+                padding-top: 120px;
+            }
+            .follow-btn {
+                padding: 30 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .follow-btn button {
+                font-size: 1.1rem;
+                font-weight: bold;
+                background-color: #f00;
+                border: none;
+                padding: 1rem;
+                outline: none;
+                border-radius: 50px;
+            }
+            .follow-btn button:hover {
+                background-color: darkred;
+            }
+            .desc {
+                padding: 1.5rem;
+            }
+            h2 {
+                padding: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- div.card>div.banner>div.profile^h2.name{Song WonMin}+div.follow-btn>button{Follow}^div.desc{어서온나} -->
+        <div class="card">
+            <div class="banner">
+                <div class="profile"></div>
+            </div>
+            <h2 class="name">Song WonMin</h2>
+            <div class="follow-btn"><button>Follow</button></div>
+            <div class="desc">어서온나</div>
+        </div>
+    </body>
+</html>

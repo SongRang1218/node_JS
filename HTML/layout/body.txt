@@ -1,0 +1,29 @@
+<body>
+    <div id="About" class="content">
+      <h1>About</h1>
+      <p>Custom Software Development Company</p>
+    </div>
+
+    <div id="Products" class="content">
+      <h1>Products</h1>
+      <p>
+        Building tailored software to address critical needs of global
+        enterprises.
+      </p>
+    </div>
+
+    <div id="Technology" class="content">
+      <h1>Technology</h1>
+      <p>Machine Learning, Artificial Intelligent, Cloud Platform.</p>
+    </div>
+
+    <div id="Downloads" class="content">
+      <h1>Downloads</h1>
+      <p>You can download a free 10 days trial.</p>
+    </div>
+
+    <div id="Etc" class="content">
+      <h1>Etc</h1>
+      <p>Everything is fine.</p>
+    </div>
+  </body>

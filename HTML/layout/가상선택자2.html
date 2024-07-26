@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            p {
+                font-weight: bold;
+                font-size: 35px;
+            }
+            p:first-child {
+                color: blue;
+            }
+            p.first-child::after {
+                content: '즐거워';
+            }
+            p::before {
+                /*윈도우 + . = 이모티콘*/
+                content: '얍 (☞ﾟヮﾟ)☞~🌞 🤦‍♀️  ';
+            }
+            p:nth-of-type(n + 2):nth-of-type(-n + 4) {
+                color: red;
+            }
+            p:nth-child(2) {
+                color: blueviolet !important;
+            }
+            p:nth-last-child(n)::after {
+                content: ' 🤦‍♂️ 🌦~☜(ﾟヮﾟ☜) 에잇';
+            }
+        </style>
+    </head>
+    <body>
+        <p><a href="./가상선택자.html">오늘도</a></p>
+        <p>더우면</p>
+        <p>내일도</p>
+        <p>모찌롱</p>
+        <p><a href="./가상선택자3.html">덥겠지</a></p>
+    </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>웹페이지 네비게이터</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const content = ['About', 'Products', 'Technology', 'Downloads', 'Etc'];
+                const color = ['tomato', 'darkolivegreen', 'dodgerblue', 'orange', 'lightpink'];
+
+                for (let i = 0; i < content.length; i++) {
+                    const button = document.createElement('button'); // <button><//button>
+                    document.body.appendChild(button); // <body><button><//button><//body>
+                    button.setAttribute('class', 'tab'); // <body><button class='tab'><//button><//body>
+                    button.textContent = content[i]; // <body><button> content내용 <//button><//body>
+                }
+
+                const bts = document.querySelectorAll('button');
+
+                bts.forEach((bt) => {
+                    bt.addEventListener('click', (e) => {
+                        const allContents = document.querySelectorAll('.content');
+                        allContents.forEach((content) => (content.style.display = 'none')); // 모든 콘텐츠 숨기기
+
+                        const selectedContent = document.getElementById(bt.textContent);
+                        if (selectedContent) {
+                            selectedContent.style.display = 'block'; // 클릭된 콘텐츠 표시
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <style>
+            .tab {
+                background-color: #555;
+                color: #fff;
+                float: left;
+                border: none;
+                outline: 0;
+                cursor: pointer;
+                padding: 14px 16px;
+                font-size: 17px;
+                width: 20%;
+            }
+
+            .tab:hover {
+                background-color: #888;
+            }
+
+            .content {
+                color: #fff;
+                display: none;
+                padding: 50px;
+                text-align: center;
+            }
+
+            #About {
+                display: block;
+                background-color: tomato;
+            }
+
+            #Products {
+                background-color: darkolivegreen;
+            }
+
+            #Technology {
+                background-color: dodgerblue;
+            }
+
+            #Downloads {
+                background-color: orange;
+            }
+
+            #Etc {
+                background-color: lightpink;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="About" class="content">
+            <h1>About</h1>
+            <p>Custom Software Development Company</p>
+        </div>
+
+        <div id="Products" class="content">
+            <h1>Products</h1>
+            <p>Building tailored software to address critical needs of global enterprises.</p>
+        </div>
+
+        <div id="Technology" class="content">
+            <h1>Technology</h1>
+            <p>Machine Learning, Artificial Intelligent, Cloud Platform.</p>
+        </div>
+
+        <div id="Downloads" class="content">
+            <h1>Downloads</h1>
+            <p>You can download a free 10 days trial.</p>
+        </div>
+
+        <div id="Etc" class="content">
+            <h1>Etc</h1>
+            <p>Everything is fine.</p>
+        </div>
+    </body>
+</html>

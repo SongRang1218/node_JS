@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>가상선택자3</title>
+        <style>
+            li {
+                float: left;
+                list-style: none;
+                padding: 0 15px;
+                font-weight: bold;
+            }
+            li:after {
+                content: '|';
+                float: right;
+                color: #ccc;
+                margin-right: -17px;
+            }
+            li:nth-last-of-type(1)::after {
+                content: '';
+            }
+        </style>
+    </head>
+    <body>
+        <li><a href="./가상선택자.html">로그인</a></li>
+        <li><a href="./가상선택자2.html">회원가입</a></li>
+        <li>마이페이지</li>
+        <li>사이트맵</li>
+        <li>고객센터</li>
+    </body>
+</html>
