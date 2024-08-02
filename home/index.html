@@ -1,11 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>메인 홈페이지</title>
+        <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+            }
+
+            .wrap {
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                min-width: 760px;
+                height: 100%;
+            }
+
+            header {
+                height: 65px;
+                background-color: #000;
+                color: #fff;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            nav ul {
+                height: 50px;
+                background-color: #333;
+                text-align: center;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                list-style-type: none;
+                margin: 0;
+            }
+
+            nav ul li {
+                display: flex;
+                align-items: center;
+            }
+
+            nav ul li button {
+                margin: 0 10px;
+                background-color: #e74c3c; /* Red */
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            nav ul li button:hover {
+                background-color: #ff5722; /* Orange */
+            }
+
+            section {
+                display: flex;
+                height: 100%;
+                flex: 1;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            aside {
+                width: 100%;
+                padding-left: 80%;
+                background-color: #000;
+                justify-content: flex-end;
+            }
+
+            article {
+                width: 80%;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+            }
+
+            footer {
+                height: 70px;
+                background-color: #000;
+                color: #fff;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card {
+                max-width: 360px;
+                height: 400px;
+                background-color: #fff;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+                display: flex;
+                flex-direction: column;
+                font-size: 1.5rem;
+                color: rgba(0, 0, 0, 0.8);
+                margin: auto;
+            }
+
+            .name {
+                text-align: center;
+                padding-top: 68px;
+                font-size: medium;
+                font-weight: bold;
+            }
+
+            .desc {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                padding: 1rem;
+                color: #e74c3c; /* Red */
+            }
+
+            .article {
+                display: flex;
+                justify-content: center;
+            }
+
+            button {
+                font-size: 1.2rem;
+                background-color: #e74c3c; /* Red */
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            button:hover {
+                background-color: #ff5722; /* Orange */
+            }
+        </style>
     </head>
+
     <body>
-        <a href="/list">게시판 바로가기</a>
+        <div class="wrap">
+            <header>
+                <h1>게시판</h1>
+            </header>
+            <aside><button onclick="location.href='/login'">로그인</button></aside>
+            <nav>
+                <ul>
+                    <li>
+                        <button onclick="location.href='/'">홈페이지</button>
+                    </li>
+                    <li>
+                        <button onclick="window.location.href='/list'">게시판</button>
+                    </li>
+                    <li>
+                        <button onclick="javascript:btn(window.location.href='/')">마이페이지</button>
+                    </li>
+                </ul>
+            </nav>
+            <section>
+                <article class="article">임시로만든 홈페이지입니다</article>
+            </section>
+            <footer>
+                <span>회사소개 개인, 개인서버동작, KYS Corp.</span>
+            </footer>
+            <script>
+                function btn() {
+                    alert('로그인이 필요합니다.');
+                }
+            </script>
+        </div>
     </body>
 </html>

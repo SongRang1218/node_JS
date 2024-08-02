@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>리액트 CDN 연습</title>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style></style>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            let turn = 1;
+            const App = () => {
+                const [Num1, setNum1] = React.useState(0);
+                const [Num2, setNum2] = React.useState(0);
+
+                const upup = () => setNum1((Num1 + 1) % 6);
+                const down = () => {
+                    if (Num2 == 0) turn = 1;
+                    if (Num2 == 5) turn = -1;
+                    setNum2(Num2 + turn);
+                };
+
+                return (
+                    <div>
+                        <h1>JSX 문법으로 숫자반복</h1>
+                        <h2>1번 스타일 0-1-2-3-4-5-0-1-2-3-4-5-0-1-2</h2>
+                        <h2>2번 스타일 0-1-2-3-4-5-4-3-2-1-0-1-2-3-4-5</h2>
+                        <hr />
+
+                        <div>
+                            <h1>{Num1}</h1>
+                            <button onClick={upup}>
+                                <strong>1번</strong>
+                            </button>
+                        </div>
+                        <div>
+                            <h1>{Num2}</h1>
+                            <button onClick={down}>
+                                <strong>2번</strong>
+                            </button>
+                        </div>
+                    </div>
+                );
+            };
+
+            ReactDOM.createRoot(document.getElementById('root')).render([<App />]);
+        </script>
+    </body>
+</html>

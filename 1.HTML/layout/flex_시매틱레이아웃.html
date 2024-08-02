@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            html.body {
+                height: 100%;
+                margin: 0;
+            }
+            .wrap {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            header {
+                height: 65px;
+                background-color: blueviolet;
+                text-align: center;
+                font-weight: bold;
+                font-size: 40px;
+            }
+            nav {
+                height: 40px;
+                background-color: aqua;
+                text-align: center;
+                padding: auto;
+                justify-content: center;
+                align-content: space-around;
+            }
+            content {
+                display: flex;
+                height: 100%;
+                flex: 1;
+            }
+            aside {
+                max-width: 100%;
+                background-color: aquamarine;
+            }
+            article {
+                width: 100px;
+            }
+            footer {
+                height: 70px;
+                background-color: darkcyan;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div class="wrap">
+                <header>Naver</header>
+                <nav>
+                    <ul>
+                        <li><a href="#">메일</a></li>
+                        <li><a href="#">카페</a></li>
+                        <li><a href="#">즐겨찾기</a></li>
+                        <li><a href="#">뉴스</a></li>
+                        <li><a href="#">카페</a></li>
+                        <li><a href="#">블로그</a></li>
+                        <li><a href="#">쇼핑</a></li>
+                    </ul>
+                </nav>
+                <content>
+                    <aside><img src="./aside.PNG" alt="광고" /></aside>
+                    <aticle>어렵네요</aticle>
+                    <aside>로그인</aside>
+                </content>
+                <footer>
+                    <span
+                        >Partners프로젝트 꽃네이버 비즈니스네이버 비즈니스 스쿨네이버 광고스토어 개설지역업체
+                        등록엑스퍼트 등록 Developers네이버 개발자 센터오픈 API오픈소스네이버 D2네이버 D2SF네이버 랩스
+                        웨일 브라우저 웨일 브라우저 이용안내 기업 사이트 기업 사이트 바로가기 네이버 정책 및
+                        약관회사소개인재채용제휴제안이용약관개인정보처리방침청소년보호정책네이버 정책고객센터ⓒ NAVER
+                        Corp.</span
+                    >
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 20px;
+                color: #ffffff;
+                background-color: aquamarine;
+            }
+
+            fieldset {
+                border: 3px solid #fff;
+                background-color: black;
+            }
+            legend {
+                border: 2px solid #eee;
+                background-color: black;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-weight: bold 5px;
+            }
+            .Title {
+                width: calc(100% - 22px);
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #854315;
+            }
+            .content {
+                width: calc(100% - 22px);
+                height: 150px;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #854315;
+            }
+            button {
+                background-color: rgb(70, 2, 2);
+                color: #fff;
+                font-weight: bold;
+                padding: 10px 20px;
+            }
+            button:hover {
+                background-color: rgb(25, 0, 255);
+            }
+        </style>
+    </head>
+    <body>
+        <fieldset>
+            <legend>작성내용</legend>
+            <form action="data" id="dataForm">
+                <label for="Title">게시글제목 </label>
+                <input class="Title" type="text" id="Title" name="Title" /><br />
+                <label for="content">게시글내용 </label>
+                <input class="content" type="text" id="content" name="content" /><br />
+                <button type="submit">작성</button>
+                <button type="reset">내용지우기</button>
+            </form>
+        </fieldset>
+    </body>
+</html>

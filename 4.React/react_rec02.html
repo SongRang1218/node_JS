@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>리액트 CDN 연습</title>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style></style>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const App = () => {
+                const [count, setCount] = React.useState(0);
+
+                const upup = () => setCount(count < 20 ? count + 1 : 20);
+                const down = () => setCount(count > 1 ? count - 1 : 0);
+
+                return (
+                    <div>
+                        <h1>JSX 문법으로 숫자올리기</h1>
+                        <h2>const [변수,변수값을 변경하는 함수] = useState(초기값)</h2>
+                        <hr />
+                        <div>
+                            <b>예제</b>
+                        </div>
+                        <div>
+                            <mark>숫자값 증가시키기</mark>
+                        </div>
+                        <button onClick={upup}>
+                            <strong>증가</strong>
+                        </button>
+                        <button onClick={down}>
+                            <strong>감소</strong>
+                        </button>
+                        <div>
+                            <h1>{count}</h1>
+                        </div>
+                    </div>
+                );
+            };
+
+            ReactDOM.createRoot(document.getElementById('root')).render([<App />]);
+        </script>
+    </body>
+</html>

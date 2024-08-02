@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>리액트 CDN 연습</title>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style></style>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const App = () => {
+                const [Clicked, setClicked] = React.useState(false);
+                const Btn = () => {
+                    if (setClicked(Clicked == false)) {
+                        setClicked(Clicked == true);
+                    } else if (setClicked((Clicked = true))) {
+                        setClicked(Clicked == false);
+                    }
+                };
+                return (
+                    <div>
+                        <h1>True or Fasle 값 설정</h1>
+                        <h2>
+                            <mark>
+                                const [{Clicked ? 'clicked' : 'count'},{Clicked ? 'setClicked' : 'setCount'}]=
+                                React.useState()
+                            </mark>
+                        </h2>
+                        <h3>{Clicked + ''}</h3>
+                        <hr />
+                        <button onClick={Btn}>{Clicked ? '클릭했어요?' : '또할껀가요?'}</button>
+                    </div>
+                );
+            };
+            ReactDOM.createRoot(document.getElementById('root')).render([<App />]);
+        </script>
+    </body>
+</html>

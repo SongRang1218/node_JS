@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Grid 시멘틱 레이아웃</title>
+        <style>
+            :root {
+                --myblue1: rgb(0, 255, 255);
+                --myblue2: rgb(100, 255, 255);
+                --myblue3: rgb(200, 255, 255);
+                --mygreen1: rgb(0, 255, 0);
+                --mygreen2: rgb(100, 255, 100);
+                --mygreen3: rgb(200, 255, 200);
+                --myred1: rgb(255, 0, 0);
+                --myred2: rgb(255, 100, 100);
+                --myred3: rgb(255, 200, 200);
+            }
+            .wrap {
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                grid-template-rows: 100px 200px 100px;
+            }
+            div {
+                margin: 3px;
+                border: 2px solid #ccc;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            }
+            .grid1 {
+                background-color: var(--myblue2);
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
+            .grid2 {
+                background-color: var(--myblue3);
+                grid-column-start: 3;
+                grid-column-end: 4;
+                /*grid-row-start: 1;
+        grid-row-end: 3;
+        */
+            }
+            .grid3 {
+                background-color: var(--mygreen2);
+                grid-column-start: 1;
+                grid-column-end: 2;
+                grid-row-start: 2;
+                grid-row-end: 4;
+            }
+            .grid4 {
+                background-color: var(--mygreen3);
+                grid-column-start: 2;
+                grid-column-end: 4;
+                /*grid-column-start: 2;
+        grid-column-end: 3;*/
+            }
+            .grid5 {
+                background-color: var(--myred2);
+                grid-column-start: 2;
+                grid-column-end: 3;
+            }
+            .grid6 {
+                background-color: var(--myred3);
+                grid-column-start: 3;
+                grid-column-end: 4;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="grid1">grid1</div>
+            <div class="grid2">grid2</div>
+            <div class="grid3">grid3</div>
+            <div class="grid4">grid4</div>
+            <div class="grid5">grid5</div>
+            <div class="grid6">grid6</div>
+        </div>
+    </body>
+</html>

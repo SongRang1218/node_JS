@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리액트 CDN 연습</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .board_wrap {
+            width: 80%;
+            margin: 50px auto;
+        }
+
+        .board_title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .board_list {
+            width: 100%;
+            border-top: 2px solid #000;
+        }
+
+        .board_list div {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .board_list .header {
+            font-weight: bold;
+            background-color: #ade1ff;
+        }
+
+        .board_list .row {
+            background-color: #e4f3ee;
+        }
+
+        .board_list .row:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="board_wrap">
+        <div class="board_title">
+            <h1>게시판</h1>
+        </div>
+        <div class="board_list">
+            <div class="header">
+                <div>번호</div>
+                <div>제목</div>
+                <div>작성자</div>
+                <div>작성일</div>
+                <div>조회수</div>
+            </div>
+            <div class="row">
+                <div>1</div>
+                <div>첫 번째 글 제목</div>
+                <div>홍길동</div>
+                <div>2024-07-25</div>
+                <div>10</div>
+            </div>
+            <div class="row">
+                <div>2</div>
+                <div>신비로운 게시글</div>
+                <div>스트레인저</div>
+                <div>2024-07-29</div>
+                <div>77</div>
+            </div>
+            <!-- 추가 행은 여기에 추가 -->
+        </div>
+    </div>
+    <div id="root"></div>
+    <script>
+        // function app() {
+        //     const [isClicked, setisClicked] = React.useState(false)
+        //     return React.createElement(
+        //         'button',
+        //         {onClick: () => setisClicked(!isClicked)},
+        //         isClicked ? 'Clicked!!' : 'Click here'
+        //     )
+        // }
+        function list() {
+            return React.createElement(
+
+            )
+        }
+
+
+
+        const domComp = document.querySelector('#root')
+        ReactDOM.render(React.createElement(list), domComp)
+
+    </script>
+    <script>
+        //     function modals() {
+        //         return (
+        //             <>
+        //                 <div class="modal">
+        //                     <div class="modal-body">
+        //                         <span>게시글작성</span>
+        //                         <hr>
+        //                             <div class="modal-title">
+        //                                 <span>작성자:</span>
+        //                             </div>
+        //                             <span>제목:</span>
+        //                             <input type="text"><br>
+        //                                 <span>내용:</span><br>
+        //                                     <textarea name="" id="" cols="30" row="10"></textarea>
+        //                                 </div>
+        //                             </div>)</>
+        //     }
+        //
+    </script>
+</body>
+
+</html>

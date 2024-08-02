@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script>
+            const url = 'https://jsonplaceholder.typicode.com/posts';
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    let list = '';
+                    list += ` <style> .id {  font-weight: bold; }  `;
+                    list += `  .id {  border-top: 2px solid #000; }  </style>`;
+                    // list += `<table> `;
+
+                    for (let i = 0; i < 5; i++) {
+                        list += `<li class="id">${[i]}. ${data[i].body}</li>`;
+                    }
+                    document.write(list);
+                });
+
+            // list += `</table> `;
+        </script>
+    </head>
+    <body></body>
+</html>

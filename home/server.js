@@ -1,12 +1,20 @@
-const e = require('express');
 const express = require('express');
 const mysql = require('mysql');
+const session = require('express-session');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
-const session = require('express-session');
-const bodyParser = require('body-parser'); //모듈 import. Express v4.16.0이상은 생략 가능
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(
+    session({
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'swm',
@@ -17,11 +25,19 @@ const db = mysql.createConnection({
 
 db.connect((error) => {
     if (error) {
-        console.log('접속실패~~~~');
+        console.log('접속 실패');
         return;
     }
     console.log('MySQL Connected!');
 });
+
+function formatDate(date) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = ('0' + (d.getMonth() + 1)).slice(-2);
+    const day = ('0' + d.getDate()).slice(-2);
+    return `${year}.${month}.${day}`;
+}
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/login.html');
@@ -29,162 +45,168 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    const { username, password } = req.body; // query 는 get 방식
-    const idOK = /^[A-Za-z]{1,8}$/g.test(username); //방법 1. true or false 변환
-    const pwOK = password.match(/^[A-Za-z0-9]{1,10}$/g); //방법 2. 정규표현식에 일치한 값
-    console.log(idOK, pwOK, !!pwOK);
+    const { username, password } = req.body;
+    const idOK = /^[A-Za-z]{1,8}$/g.test(username);
+    const pwOK = password.match(/^[A-Za-z0-9]{1,10}$/g);
 
     if (idOK && !!pwOK) {
-        res.sendFile(__dirname + '/index.html');
+        req.session.username = username; // 세션에 사용자 ID 저장
+        res.sendFile(__dirname + '/myp.html');
     } else {
         res.send('형식에 맞도록 입력하세요.');
     }
 });
 
+app.post('/data', (req, res) => {
+    const { Title, Content } = req.body;
+    const name = req.session.username; // 세션에서 사용자 ID 가져오기
+    const Today = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    db.query(
+        `INSERT INTO Home (Title, name, Today, Content) VALUES (?, ?, ?, ?)`,
+        [Title, name, Today, Content],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(`게시글: ${Title}, 내용: ${Content}, 작성자: ${name}, 작성일: ${Today}`);
+            console.log('Data inserted successfully');
+            res.redirect('/list');
+        }
+    );
+});
+
 app.get('/list', (req, res) => {
-    console.log('List requested');
     db.query(`SELECT * FROM Home`, (err, results) => {
-        const data = results;
+        if (err) {
+            console.error(err);
+            return;
+        }
+
         let list = `<!DOCTYPE html>`;
         list += `<html lang="ko">`;
-        list += `    <head>`;
+        list += `<head>`;
         list += `<meta charset="UTF-8" />`;
         list += `<meta name="viewport" content="width=device-width, initial-scale=1.0" />`;
-        list += `<title>Document</title>`;
-        list += `<style>`;
-        list += `.head {`;
-        list += `text-align: center;`;
-        list += `}`;
-        list += `.Title{padding-left: 100px;`;
-        list += `padding-right: 150px;}`;
-        list += `.list {`;
-        list += `display: flex;`;
-        list += `padding-left: 20px;`;
-        list += `padding-right: 20px;`;
-        list += `justify-content: space-between;`;
-        list += `background-color: rgb(0, 225, 255);`;
-        list += `align-items: center;`;
-        list += `border-bottom: 5px solid #000;`;
-        list += `border-top: 5px solid #F00;`;
-        list += `font-weight: bold;`;
-        list += `}`;
-        list += ` .li{`;
-        list += `padding-left: 20px;`;
-        list += `padding-right: 20px;`;
-        list += `display: flex;`;
-        list += `justify-content: space-between;`;
-        list += `align-items: center;`;
-        list += `font-weight: bold;`;
-        list += `}`;
-        list += `</style>`;
-        list += `    </head>`;
+        list += `<title>게시판</title>`;
+        list += `</head>`;
         list += `<body>`;
-        list += `    <!-- table>tr>th*5^tr>td*5 -->`;
-        list += `   <div class="head"> <h1>게시판</h1> </div>`;
-        list += `<button type="button" onclick="location.href='/qurey' ">게시물작성</button>`;
-        list += `<button type="button" onclick="location.href='/login' ">로그아웃</button>`;
-        list += ` <div class="list">  `;
-        list += `            <p>No.</p>`;
-        list += `            <p class="Title">제목</p>`;
-        list += `            <p>작성자</p>`;
-        list += `            <p>작성일</p>`;
-        list += `            <p>조회수</p>`;
-        list += `   </div></div>   `;
-        data.forEach((v) => {
-            list += `        <div class="li">`;
-            list += `            <p>${v.Num}</p>`;
-            list += `            <button type="button" onclick=""><p class="Title">${v.Title}</p></button>`;
-            list += `            <p>${v.name}</p>`;
-            list += `            <p>${v.Today}</p>`;
-            list += `            <p>${v.VIEW_COUNT}</p>`;
-            list += `        </div>`;
+        list += `<div><a href="/"><button>로그아웃</button></a></div>`;
+        list += `<h1>게시판</h1>`;
+        list += `<a href="/qurey"><button>게시물 작성</button></a>`;
+        list += `<ul>`;
+        results.forEach((v) => {
+            list += `<li>`;
+            list += `<a href="/post/${v.Num}">${v.Title}</a> - ${v.name} - ${formatDate(v.Today)} - 조회수: ${
+                v.VIEW_COUNT
+            }`;
+            list += `</li>`;
         });
-
-        list += `    </table>`;
+        list += `</ul>`;
         list += `</body>`;
-        list += ``;
         list += `</html>`;
         res.send(list);
     });
 });
+
+app.get('/post/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('SELECT * FROM Home WHERE Num = ?', [id], (err, result) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        if (result.length > 0) {
+            const post = result[0];
+            let postContent = `<!DOCTYPE html>`;
+            postContent += `<html lang="ko">`;
+            postContent += `<head>`;
+            postContent += `<meta charset="UTF-8" />`;
+            postContent += `<meta name="viewport" content="width=device-width, initial-scale=1.0" />`;
+            postContent += `<title>${post.Title}</title>`;
+            postContent += `</head>`;
+            postContent += `<body>`;
+            postContent += `<h1>${post.Title}</h1>`;
+            postContent += `<p>작성자: ${post.name}</p>`;
+            postContent += `<p>작성일: ${formatDate(post.Today)}</p>`;
+            postContent += `<p>조회수: ${post.VIEW_COUNT}</p>`;
+            postContent += `<div>${post.Content}</div>`;
+            postContent += `<a href="/list"><button>목록으로</button></a>`;
+            postContent += `</body>`;
+            postContent += `</html>`;
+            res.send(postContent);
+        } else {
+            res.send('게시글을 찾을 수 없습니다.');
+        }
+    });
+});
+
 app.get('/qurey', (req, res) => {
-    res.send(
-        `<!DOCTYPE html>
+    res.send(`<!DOCTYPE html>
 <html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>게시글 작성</title>
         <style>
             body {
                 margin: 0;
                 padding: 20px;
-                color: #ffffff;
+                color: #000;
                 background-color: rgb(255, 255, 255);
             }
             fieldset {
-                border: 3px solid #fff;
-                background-color: black;
+                border: 3px solid #000;
+                background-color: #f0f0f0;
                 font-weight: bold;
             }
             legend {
-                border: 2px solid #eee;
-                background-color: black;
+                border: 2px solid #000;
+                background-color: #f0f0f0;
                 padding: 5px 10px;
                 border-radius: 5px;
-                font-weight: bold 5px;
+                font-weight: bold;
             }
-            input {
+            input,
+            textarea {
                 width: calc(100% - 22px);
                 padding: 10px;
                 margin-bottom: 10px;
-                border: 1px solid #854315;
+                border: 1px solid #000;
             }
             button {
-                background-color: rgb(70, 2, 2);
+                background-color: #333;
                 color: #fff;
                 font-weight: bold;
                 padding: 10px 20px;
             }
             button:hover {
-                background-color: rgb(25, 0, 255);
+                background-color: #555;
             }
             .memo {
-                height: 500px;
+                height: 200px;
             }
         </style>
     </head>
     <body>
         <fieldset>
-            <legend>게시글작성</legend>
-            <form action="data" id="dataForm">
+            <legend>게시글 작성</legend>
+            <form action="/data" method="POST" id="dataForm">
                 <label for="Title">제목</label>
-                <input type="text" id="Email" name="Email" /><br />
-                <label for="text">내용</label>
-                <input type="text" class="memo" /><br />
+                <input type="text" id="Title" name="Title" required /><br />
+                <label for="Content">내용</label>
+                <textarea id="Content" name="Content" class="memo" required></textarea><br />
                 <button type="submit">작성하기</button>
-                <button type="reset">내용지우기</button>
-                <button type="button" onclick="location.href='/list' ">게시판</button>
+                <button type="reset">내용 지우기</button>
+                <button type="button" onclick="location.href='/list'">뒤로가기</button>
             </form>
         </fieldset>
     </body>
-</html>`
-    );
+</html>
+`);
 });
 
-app.get('/data', (req, res) => {
-    const { Title, name } = req.query;
-    db.query(`INSERT INTO Home (Title,name) VALUES (?,?)`, [Title, name], (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        res.redirect('/');
-        console.log(`게시글 : ${Title}, 작성자 : ${name}, 작성일 : ${Today}`);
-        console.log('Data inserted successfully');
-        return;
-    }); //MySQL query here
-});
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });

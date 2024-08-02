@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>리액트 CDN 연습</title>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style></style>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const text1 = '안녕하세요';
+            const text2 = '반가워요';
+            const Header = () => <h1>머리</h1>;
+            const Content = () => {
+                return (
+                    <div>
+                        <h2>열심히 해봅시다.</h2>
+                        <button onClick={() => notice(text1)}>{text1}</button>
+                        <button onClick={() => notice(text2)}>{text2}</button>
+                    </div>
+                );
+            };
+            const Footer = () => <h2>발</h2>;
+            const notice = (구멍) => alert(구멍);
+            //const [변수  , 변수값을 바꿀 함수명 ] = React.useState()
+            //const [ count  , setCount ] = React.useState(초기값)
+
+            ReactDOM.createRoot(document.getElementById('root')).render([<Header />, <Content />, <Footer />]);
+        </script>
+    </body>
+</html>

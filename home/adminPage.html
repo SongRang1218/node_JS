@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #f4f4f4;
+                margin: 0;
+            }
+            .card {
+                max-width: 360px;
+                height: 450px;
+                width: 250px;
+                border-radius: 2rem;
+                overflow: hidden;
+                box-shadow: 10px 10px 30px #000;
+                display: flex;
+                flex-direction: column;
+                font-size: 1.5rem;
+                color: #000;
+                background-color: #fff;
+            }
+            .banner {
+                background-image: url('C:/workspace/NODEJS/nodejs/home/호냥이.PNG');
+                background-size: cover;
+                background-position: center;
+                height: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .profile {
+                width: 8rem;
+                height: 8rem;
+                background-image: url('https://item.kakaocdn.net/do/ac144a7a26e9355e505aa237ea189cd6f43ad912ad8dd55b04db6a64cddaf76d');
+                background-size: cover;
+                border-radius: 50%;
+                box-shadow: 10px 10px 30px #000;
+                transform: translateY(50%);
+                transition: transform 250ms ease;
+            }
+            .profile:hover {
+                transform: translateY(50%) scale(3);
+            }
+            .name {
+                text-align: center;
+                margin-top: 4rem;
+                margin-bottom: 1rem;
+                font-weight: bold;
+            }
+            .follow-btn {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0 1rem;
+            }
+            .follow-btn button {
+                font-size: 1.1rem;
+                color: wheat;
+                font-weight: bold;
+                background-color: #000;
+                border: none;
+                padding: 0.5rem 1rem;
+                outline: none;
+                border-radius: 50px;
+                margin-top: 0.5rem;
+                cursor: pointer;
+            }
+            .follow-btn button:hover {
+                background-color: rgb(243, 112, 6);
+            }
+            .top {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            .top button {
+                font-size: 1rem;
+                color: #fff;
+                background-color: #000;
+                border: none;
+                padding: 0.5rem 1rem;
+                outline: none;
+                border-radius: 50px;
+                cursor: pointer;
+            }
+            .top button:hover {
+                background-color: rgb(243, 112, 6);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="top">
+            <button onclick="javascript:btn(location.href='/login')">로그아웃</button>
+        </div>
+        <div class="card">
+            <div class="banner">
+                <div class="profile"></div>
+            </div>
+            <h2 class="name">admin</h2>
+            <div class="follow-btn">
+                <button class="btn1" onclick="location.href='/content'">공지사항적기</button>
+                <button onclick="location.href='/list'">게시판관리</button>
+            </div>
+            <p>이제 그만 일하고싶다</p>
+        </div>
+        <script>
+            function btn(btn1) {
+                alert('로그아웃되었습니다.');
+            }
+        </script>
+    </body>
+</html>
