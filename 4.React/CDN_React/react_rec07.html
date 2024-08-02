@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>리액트 CDN 연습</title>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style>
+            .hi {
+                display: inline;
+                box-shadow: inset 0 300px 0 #d0f52d;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="root"></div>
+
+        <script type="text/babel">
+            const App = () => {
+                const [count, setCount] = React.useState(0);
+                const upup = () => setCount(count < 4 ? count + 1 : 4);
+                const down = () => setCount(count > 1 ? count - 1 : 0);
+                const arr = ['안녕하세요', '반갑습니다', '오늘은 참덥네요', '배가고프시죠?', '아아 드실까요'];
+
+                return (
+                    <div>
+                        <h1>숫자증가 문제</h1>
+                        <h2>
+                            <u className="hi">'안녕하세요'</u>, <u className="hi">'반갑습니다'</u>,{' '}
+                            <u className="hi">'오늘은 참덥네요'</u>, <u className="hi">'배가고프시죠?'</u>,{' '}
+                            <u className="hi">'아아 드실까요'</u>
+                        </h2>
+                        <hr />
+                        <h3>{arr[count]}</h3>
+                        <button onClick={down}>{`☜(ﾟヮﾟ☜)`}</button>
+                        <button onClick={upup}>{`(☞ﾟヮﾟ)☞`}</button>
+                    </div>
+                );
+            };
+
+            ReactDOM.createRoot(document.getElementById('root')).render([<App />]);
+        </script>
+    </body>
+</html>

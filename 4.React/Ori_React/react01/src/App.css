@@ -1,0 +1,70 @@
+h1 {
+    text-align: center;
+    width: auto;
+    margin-left: 40%;
+    margin-right: 40%;
+    border-radius: 2rem;
+    background-color: #ff7b00;
+}
+body {
+    max-width: 1150px;
+    /* min-width: 650px; */
+}
+.divA {
+    border: 3px solid #f00;
+    height: 700px;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.divB {
+    width: 80%;
+    padding: 5px;
+}
+button {
+}
+.divC {
+    width: 25%;
+    margin-top: 8rem;
+    height: 60%;
+    background-color: #ee7708;
+    border-radius: 25px;
+    border: 3px solid #ee7708;
+}
+aside {
+    margin-top: 20px;
+    padding-top: 40px;
+    font-size: 23px;
+    text-align: center;
+}
+table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    border: 2px solid #000;
+    color: #251800;
+    background-color: white;
+}
+th {
+    background-color: rgb(200, 255, 255);
+}
+tr,
+td,
+th {
+    border: 2px solid #000;
+    font-weight: bold;
+}
+.ho1:hover {
+    background-color: #ee7708;
+    color: white;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

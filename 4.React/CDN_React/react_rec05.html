@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리액트 CDN 연습</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            position: absolute;
+            top: 20%;
+            left: calc(50% - 150px);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-container input {
+            width: 94%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .login-container .reset-btn {
+            background-color: #6c757d;
+        }
+
+        .login-container .reset-btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"> </div>
+    <script type="text/babel">
+        const App = () => {
+            const [clicked, setClicked] = React.useState(false)
+            const change = () => setClicked(!clicked)
+            return (
+                <>
+                    <h1>True or Fasle 값 설정</h1>
+                    <h2><mark>const [count , setCount] = React.useState()</mark></h2>
+                    <h3>{clicked + ''}</h3>
+                    <hr />
+                    <button onClick={change}>{clicked ? '창이 나타난다' : '없어진다.'}</button>
+                    {/*clicked ? <Modal /> : ''*/}
+                    {clicked && <Modal />}
+                </>
+            )
+        }
+        const Modal = () => {
+            return (
+
+                <div class="login-container">
+                    <h2>로그인</h2>
+                    <form action="/login" method="POST">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="아이디" required />
+                        <label for="pw">Password:</label>
+                        <input type="password" id="pw" name="password" placeholder="비밀번호" required />
+                        <button type="submit">로그인</button>
+                        <button type="reset" class="reset-btn">다시 입력</button>
+                    </form>
+
+                </div>
+
+            )
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+</body>
+
+</html>
