@@ -1,13 +1,18 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    border: 5px solid #000;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+
+    height: 500px;
+    margin: 10px;
+    padding: 50px;
+}
+button,
+input {
+    margin-bottom: 10px;
 }
 
+/* 
 .container {
     display: flex;
 }
@@ -56,4 +61,4 @@ body {
 
 .join-container .reset-btn:hover {
     background-color: #5a6268;
-}
+} */

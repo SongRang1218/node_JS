@@ -7,13 +7,14 @@ function App() {
 
     return (
         <div>
-            <form>
+          <Join />
+            {/* <form>
                 <div>리액트 시작 03</div>
                 <input type="text" onChange={handleInput} />
                 <h3>{text}</h3>
                 <button type="delete">지우기</button>
                 <button type="reset">지우기</button>
-            </form>
+            </form> */}
         </div>
     );
 }
