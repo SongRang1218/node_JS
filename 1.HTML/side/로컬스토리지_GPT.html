@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>로컬스토리지 활용</h1>
+        이름 : <input type="text" class="input in1" /><br />
+        나이 : <input type="text" class="input in2" /><br />
+        주소 : <input type="text" class="input in3" /><br />
+        <button id="data-save">저장하기</button>
+        <hr />
+        <button id="data-load">불러오기</button>
+        <hr />
+        <button id="data-del">삭제하기</button>
+        <h3></h3>
+        <script>
+            const in1 = document.querySelector('.in1'); // 이름 입력
+            const in2 = document.querySelector('.in2'); // 나이 입력
+            const in3 = document.querySelector('.in3'); // 주소 입력
+            const btnSave = document.querySelector('#data-save'); // 저장하기 버튼
+            const btnLoad = document.querySelector('#data-load'); // 불러오기 버튼
+            const btnDel = document.querySelector('#data-del'); // 삭제하기 버튼
+            const h3 = document.querySelector('h3'); // 결과
+
+            // 로컬 스토리지에서 데이터를 불러오거나, 데이터가 없는 경우 빈 배열 초기화
+            const upData = JSON.parse(localStorage.getItem('myData')) ?? [];
+
+            // 로컬 스토리지에서 ID 값을 불러오거나, 값이 없는 경우 1로 초기화
+            let upId = parseInt(localStorage.getItem('nextId')) || 1;
+
+            btnSave.addEventListener('click', () => {
+                const ori = { id: upId++, name: in1.value, age: in2.value, address: in3.value };
+                upData.push(ori);
+
+                // 데이터를 로컬 스토리지에 저장
+                localStorage.setItem('myData', JSON.stringify(upData));
+
+                // 다음 ID 값을 로컬 스토리지에 저장
+                localStorage.setItem('nextId', upId);
+
+                // 입력 필드 초기화
+                in1.value = '';
+                in2.value = '';
+                in3.value = '';
+            });
+
+            btnLoad.addEventListener('click', () => {
+                const data = localStorage.getItem('myData');
+                h3.innerHTML = data ? JSON.stringify(JSON.parse(data), null, 2) : '저장소에 데이터가 없습니다.';
+            });
+
+            btnDel.addEventListener('click', () => {
+                // 데이터를 삭제하고 ID도 초기화
+                localStorage.removeItem('myData');
+                localStorage.removeItem('nextId');
+                upId = 1;
+                h3.innerHTML = '데이터가 삭제되었습니다.';
+            });
+        </script>
+    </body>
+</html>

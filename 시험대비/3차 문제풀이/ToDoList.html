@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>할 일 목록</title>
+        <style>
+            body {
+                text-align: center;
+                padding-bottom: 10px;
+                border: 3px solid #000;
+                max-width: 80%;
+                min-width: 30%;
+                margin: 0 auto; /* 페이지 중앙 정렬 */
+                background-color: #f0f8ff; /* 배경색 설정 */
+                font-family: Arial, sans-serif; /* 폰트 설정 */
+            }
+
+            h2 {
+                color: #333;
+            }
+
+            input[type='textarea'] {
+                padding: 10px;
+                width: 80%;
+                max-width: 400px;
+                margin: 10px auto;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                display: block;
+            }
+
+            button {
+                padding: 10px 20px;
+                margin: 5px;
+                border: none;
+                border-radius: 5px;
+                background-color: #2ebdff;
+                color: #fff;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                transition: background-color 0.3s;
+            }
+
+            button:hover {
+                background-color: #1a8ac9;
+            }
+
+            .sdi {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+            }
+
+            table {
+                border-collapse: collapse;
+                margin: 0 auto;
+                width: 80%;
+                max-width: 600px;
+                background-color: #ffffff;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+            }
+
+            tr {
+                border-bottom: 1px solid #ddd;
+            }
+
+            tr:hover {
+                background-color: #2ebdff;
+                color: #000;
+            }
+
+            td {
+                padding: 10px;
+                text-align: left;
+            }
+
+            .button-style {
+                margin-left: 10px;
+                padding: 5px 10px;
+                background-color: #f44336;
+                color: #fff;
+                border-radius: 3px;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .button-style:hover {
+                background-color: #d32f2f;
+            }
+
+            input[type='checkbox'] {
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button class="BT" id="lo" onclick="window.location.href='/logout' ">로그아웃</button>
+        <hr />
+        <h2>할 일 목록</h2>
+        <input type="textarea" placeholder="할 일을 입력하세요" />
+        <button id="add-btn">추가하기</button>
+        <button id="deleteCheckedButton">체크된 항목 삭제</button>
+        <button id="deleteAllButton">전체 삭제</button>
+        <div class="sdi"><table class="ta"></table></div>
+
+        <script>
+            const tlist = document.querySelector('.ta');
+            const input = document.querySelector('input');
+            const addbtn = document.querySelector('#add-btn');
+            const deleteCheckedButton = document.querySelector('#deleteCheckedButton');
+            const deleteAllButton = document.querySelector('#deleteAllButton');
+            const list = document.querySelector('.ta');
+            let inputData;
+            input.addEventListener('keyup', (e) => {
+                inputData = e.currentTarget.value;
+            });
+            addbtn.addEventListener('click', () => {
+                if (inputData) {
+                    const vtrAdd = document.createElement('tr');
+                    const vdi = document.createElement('div'); // 라인 하나 추가
+                    const vcheck = document.createElement('input'); // 체크박스 추가
+                    const vspan = document.createElement('span'); // 추가된 내용
+                    const vbutton = document.createElement('button'); // 버튼 추가
+
+                    const tdCheck = document.createElement('td');
+                    const tdSpan = document.createElement('td');
+                    const tdButton = document.createElement('td');
+
+                    tdCheck.appendChild(vcheck);
+                    tdSpan.appendChild(vspan);
+                    tdButton.appendChild(vbutton);
+
+                    vbutton.classList.add('button-style');
+                    vdi.classList.add('div-style');
+                    vcheck.type = 'checkbox';
+                    vspan.textContent = inputData;
+                    vbutton.textContent = '삭제';
+
+                    tlist.appendChild(vtrAdd).append(tdCheck, tdSpan, tdButton);
+                    // list.appendChild(vdi).append(vcheck, vspan, vbutton);
+
+                    input.value = inputData = null; // 내용 비우기
+
+                    vcheck.addEventListener('click', (e) => {
+                        vspan.style.color = e.currentTarget.checked ? 'red' : 'black'; // 색넣기
+                        vspan.style.textDecoration = e.currentTarget.checked ? 'line-through' : 'none'; // 가운데 줄긋기
+                    });
+
+                    vbutton.addEventListener('click', (e) => {
+                        if (confirm('정말 삭제하시겠습니까?')) {
+                            tlist.removeChild(vtrAdd); // vdi 대신 vtrAdd를 삭제
+                        }
+                    });
+                } else {
+                    alert(`내용을 입력하세요.`);
+                }
+            });
+            deleteCheckedButton.addEventListener('click', () => {
+                const checkedItems = tlist.querySelectorAll('input[type="checkbox"]:checked');
+                if (checkedItems.length > 0 && confirm('체크된 항목을 삭제하시겠습니까?')) {
+                    checkedItems.forEach((item) => tlist.removeChild(item.closest('tr')));
+                } else {
+                    alert('삭제할 항목이 없습니다.');
+                }
+            });
+
+            // 전체 삭제
+            deleteAllButton.addEventListener('click', () => {
+                if (tlist.children.length > 0 && confirm('모든 항목을 삭제하시겠습니까?')) {
+                    while (tlist.firstChild) {
+                        tlist.removeChild(tlist.firstChild);
+                    }
+                } else {
+                    alert('삭제할 항목이 없습니다.');
+                }
+            });
+        </script>
+    </body>
+</html>

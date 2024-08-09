@@ -4,12 +4,22 @@ function App() {
     return (
         <div className="divA">
             <div className="divC">
-                <aside>
-                    <button>메뉴</button>
-                </aside>
-                <aside>메뉴</aside>
-                <aside>메뉴</aside>
-                <aside>메뉴</aside>
+                <details>
+                    <summary>
+                        {/* {'메뉴를 클릭해보세요.'} */}
+                        <aside className="A1">메뉴</aside>
+                    </summary>
+
+                    <aside>
+                        <button>게시판</button>
+                    </aside>
+                    <aside>
+                        <button>게시판</button>
+                    </aside>
+                    <aside>
+                        <button>게시판</button>
+                    </aside>
+                </details>
             </div>
             <div className="divB">
                 <h1>게시판</h1>
@@ -47,5 +57,5 @@ function App() {
         </div>
     );
 }
-const btn = () => alert('안녕하세요');
+// const btn = () => alert('안녕하세요');
 export default App;

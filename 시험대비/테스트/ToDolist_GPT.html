@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>할 일 목록</title>
+    </head>
+    <body>
+        <h2>할 일 목록</h2>
+        <input type="text" placeholder="할 일을 입력하세요" />
+        <button id="addButton">추가하기</button>
+        <button id="deleteCheckedButton">체크된 항목 삭제</button>
+        <button id="deleteAllButton">전체 삭제</button>
+        <div></div>
+    </body>
+    <script>
+        const input = document.querySelector('input');
+        const addButton = document.querySelector('#addButton');
+        const deleteCheckedButton = document.querySelector('#deleteCheckedButton');
+        const deleteAllButton = document.querySelector('#deleteAllButton');
+        const list = document.querySelector('div');
+        let inputData;
+
+        input.addEventListener('keyup', (e) => {
+            inputData = e.currentTarget.value;
+        });
+
+        addButton.addEventListener('click', () => {
+            if (inputData) {
+                const vdiv = document.createElement('div'); // 라인하나 추가
+                const vcheck = document.createElement('input'); //input 추가
+                const vspan = document.createElement('span'); //추가된 내용
+                const vbutton = document.createElement('button'); // 삭제 버튼 추가
+
+                vcheck.type = 'checkbox'; // input 타입을 체크박스로 변환
+                vbutton.textContent = '삭제';
+                vspan.textContent = inputData;
+
+                // 각 요소를 div에 추가
+                vdiv.append(vcheck, vspan, vbutton);
+                list.appendChild(vdiv);
+
+                // 입력값 초기화
+                input.value = inputData = null;
+
+                // 체크박스 클릭 시 스타일 변경
+                vcheck.addEventListener('click', (e) => {
+                    vdiv.style.color = e.currentTarget.checked ? 'red' : 'black';
+                    vdiv.style.textDecoration = e.currentTarget.checked ? 'line-through' : 'none';
+                });
+
+                // 삭제 버튼 클릭 시 항목 삭제
+                vbutton.addEventListener('click', (e) => {
+                    if (confirm('정말 삭제하시겠습니까?')) {
+                        list.removeChild(vdiv);
+                    }
+                });
+            } else {
+                alert(`내용을 입력하세요.`);
+            }
+        });
+
+        // 체크된 항목 삭제
+        deleteCheckedButton.addEventListener('click', () => {
+            const checkedItems = list.querySelectorAll('input[type="checkbox"]:checked');
+            if (checkedItems.length > 0 && confirm('체크된 항목을 삭제하시겠습니까?')) {
+                checkedItems.forEach((item) => list.removeChild(item.parentElement));
+            } else {
+                alert('삭제할 항목이 없습니다.');
+            }
+        });
+
+        // 전체 삭제
+        deleteAllButton.addEventListener('click', () => {
+            if (list.children.length > 0 && confirm('모든 항목을 삭제하시겠습니까?')) {
+                while (list.firstChild) {
+                    list.removeChild(list.firstChild);
+                }
+            } else {
+                alert('삭제할 항목이 없습니다.');
+            }
+        });
+    </script>
+</html>
