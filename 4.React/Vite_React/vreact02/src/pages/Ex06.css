@@ -1,0 +1,9 @@
+#ex06-h1 {
+    color: darkseagreen;
+}
+.ex6-div {
+    width: 200px;
+    height: 200px;
+    border-radius: 80%;
+    background-color: red;
+}

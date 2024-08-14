@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>투표</title>
+        <style>
+            h1 {
+                text-align: center;
+            }
+            table {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            table,
+            tr,
+            th,
+            td {
+                border: 2px solid #000;
+                border-collapse: collapse;
+                height: 30px;
+            }
+            .Check {
+                text-align: center;
+            }
+            #ex {
+                opacity: 0.5;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>- 투표하기 -</h1>
+        <form name="frm" action="Regist" method="post">
+            <table class="1">
+                <tr>
+                    <th>주민번호</th>
+                    <td>
+                        <input type="text" name="Mi" />
+                        <span id="ex">예: 8906153154726</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>성명</th>
+                    <td><input type="text" name="" /></td>
+                </tr>
+                <tr>
+                    <th>투표번호</th>
+                    <td>
+                        <select>
+                            <option>[1]김후보</option>
+                            <option>[2]이후보</option>
+                            <option>[3]박후보</option>
+                            <option>[4]조후보</option>
+                            <option>[5]최후보</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>투표시간</th>
+                    <td><input type="text" name="" placeholder="예 : 0930" /></td>
+                </tr>
+                <tr>
+                    <th>투표장소</th>
+                    <td><input type="text" name="" placeholder="예 : 제1투표장" /></td>
+                </tr>
+                <tr>
+                    <th>유권자확인</th>
+                    <td>
+                        <div class="Check">
+                            <input type="radio" name="check" value="" />확인
+                            <input type="radio" name="check" value="" />미확인
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <input type="submit" value="투표하기" onclick="return inputCheck()" />
+                        <input type="button" value="다시하기" onclick="window.location.href='./Test.html'" />
+                    </th>
+                </tr>
+            </table>
+        </form>
+        <script>
+            function inputCheck() {
+                if (document.frm.Mi.value.length != 13) {
+                    alert('유효하지않은 주민번호 입니다. 숫자 13자리로 입력해주세요.');
+                    return false;
+                }
+            }
+        </script>
+    </body>
+</html>

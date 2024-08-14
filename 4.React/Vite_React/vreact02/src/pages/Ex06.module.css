@@ -1,0 +1,10 @@
+.ex6-div {
+    width: 200px;
+    height: 200px;
+    border-radius: 0%;
+    background-color: rgb(255, 123, 123);
+}
+.ex6-div ul li {
+    background-color: blue;
+    color: red;
+}
